@@ -15,6 +15,7 @@ except ImportError:
 QUERY_DELAY=30
 #Area to search for flights, see secrets file
 BOUNDS_BOX=secrets["bounds_box"]
+FONT_PATH=secrets["font_path"]
 
 #URLs
 FLIGHT_SEARCH_HEAD="https://data-cloud.flightradar24.com/zones/fcgi/feed.js?bounds="
@@ -191,8 +192,8 @@ def get_flights():
 
 def display_flight():
     #Init fonts
-    font20 = ImageFont.truetype('ush_font.ttf', 20)
-    font15 = ImageFont.truetype('ush_font.ttf', 15)
+    font20 = ImageFont.truetype(FONT_PATH, 20)
+    font15 = ImageFont.truetype(FONT_PATH, 15)
     #Init Screen
     epd = epd2in13_V4.EPD()
     epd.init()
