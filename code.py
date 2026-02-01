@@ -116,7 +116,8 @@ def parse_details_json(fn):
         global label1_short
         global label1_long
         global label2_short
-        global label2_long
+        global label2_origin
+        global label2_dest
         global label3_short
         global label3_long
 
@@ -124,6 +125,8 @@ def parse_details_json(fn):
         label1_long=airline_name
         label2_short=airport_origin_code+"-"+airport_destination_code
         label2_long=airport_origin_name+"-"+airport_destination_name
+        label2_origin=airport_origin_name
+        label2_dest=airport_destination_name
         label3_short=aircraft_code
         label3_long=aircraft_model
 
@@ -206,8 +209,8 @@ def display_flight():
     drawry = ImageDraw.Draw(HRYimage)
     drawblack.text((10, 0), label1_short, font = font15, fill = 0)
     drawblack.text((10, 20), label1_long, font = font15, fill = 0)
-    drawblack.text((10, 40), label2_short, font = font15, fill = 0)
-    drawblack.text((10, 60), label2_long, font = font15, fill = 0)
+    drawblack.text((10, 40), label2_origin, font = font15, fill = 0)
+    drawblack.text((10, 60), label2_dest, font = font15, fill = 0)
     drawblack.text((10, 80), label3_short, font = font15, fill = 0)
     drawblack.text((10, 100), label3_long, font = font15, fill = 0)
     epd.display(epd.getbuffer(HBlackimage))
