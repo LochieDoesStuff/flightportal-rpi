@@ -191,8 +191,8 @@ def get_flights():
 
 def display_flight():
     #Init fonts
-    font20 = ImageFont.truetype('ush_font.ttc', 20)
-    font18 = ImageFont.truetype('ush_font.ttc', 18)
+    font20 = ImageFont.truetype('ush_font.ttf', 20)
+    font18 = ImageFont.truetype('ush_font.ttf', 18)
     #Init Screen
     epd = epd2in13_V4.EPD()
     epd.init()
