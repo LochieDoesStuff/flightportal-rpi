@@ -205,7 +205,7 @@ def display_flight():
     drawry = ImageDraw.Draw(HRYimage)
     drawblack.text((10, 0), label1_short, font = font20, fill = 0)
     drawblack.text((10, 30), label2_short, font = font20, fill = 0)
-    drawblack.text((10, 60), label2_short, font = font20, fill = 0)
+    drawblack.text((10, 60), label3_short, font = font20, fill = 0)
     epd.display(epd.getbuffer(HBlackimage))
     time.sleep(2)
     # Sleep Display
