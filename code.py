@@ -120,7 +120,7 @@ def parse_details_json(fn):
         global label3_long
 
         label1_short=flight_number
-        label1_long=flight_number +" " +airline_name
+        label1_long=airline_name
         label2_short=airport_origin_code+"-"+airport_destination_code
         label2_long=airport_origin_name+"-"+airport_destination_name
         label3_short=aircraft_code
@@ -192,7 +192,7 @@ def get_flights():
 def display_flight():
     #Init fonts
     font20 = ImageFont.truetype('ush_font.ttf', 20)
-    font18 = ImageFont.truetype('ush_font.ttf', 18)
+    font15 = ImageFont.truetype('ush_font.ttf', 15)
     #Init Screen
     epd = epd2in13_V4.EPD()
     epd.init()
@@ -203,9 +203,12 @@ def display_flight():
     HRYimage = Image.new('1', (epd.height, epd.width), 255)  # 250*122
     drawblack = ImageDraw.Draw(HBlackimage)
     drawry = ImageDraw.Draw(HRYimage)
-    drawblack.text((10, 0), label1_long, font = font20, fill = 0)
-    drawblack.text((10, 30), label2_long, font = font20, fill = 0)
-    drawblack.text((10, 60), label3_long, font = font20, fill = 0)
+    drawblack.text((10, 0), label1_short, font = font15, fill = 0)
+    drawblack.text((10, 20), label1_long, font = font15, fill = 0)
+    drawblack.text((10, 40), label2_short, font = font15, fill = 0)
+    drawblack.text((10, 60), label2_long, font = font15, fill = 0)
+    drawblack.text((10, 80), label3_short, font = font15, fill = 0)
+    drawblack.text((10, 100), label3_long, font = font15, fill = 0)
     epd.display(epd.getbuffer(HBlackimage))
     time.sleep(2)
     # Sleep Display
