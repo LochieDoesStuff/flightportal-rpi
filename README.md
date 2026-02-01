@@ -4,10 +4,6 @@ This is me using this codebase as a starting point to make a similar device with
 
 Original Readme is as follows:
 
-
-
-
-
 # flightportal
 Project for displaying the details of planes overhead on an Adafruit MatrixPortal and LED matrix
 
