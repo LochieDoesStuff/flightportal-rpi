@@ -1,25 +1,25 @@
 import time
-from random import randrange
-import board
-import terminalio
-from adafruit_matrixportal.matrixportal import MatrixPortal
-from adafruit_portalbase.network import HttpError
-import adafruit_requests as requests
+#from random import randrange
+#import board
+#import terminalio
+#from adafruit_matrixportal.matrixportal import MatrixPortal
+#from adafruit_portalbase.network import HttpError
+import requests
 import json
 
-import adafruit_display_text.label
-import board
-import displayio
-import framebufferio
-import rgbmatrix
-import terminalio
-import gc
+##import adafruit_display_text.label
+#import board
+#import displayio
+#import framebufferio
+#import rgbmatrix
+#import terminalio
+#import gc
 
-import busio
-from digitalio import DigitalInOut
-import neopixel
-from adafruit_esp32spi import adafruit_esp32spi
-from adafruit_esp32spi import adafruit_esp32spi_wifimanager
+#import busio
+#from digitalio import DigitalInOut
+#import neopixel
+#from adafruit_esp32spi import adafruit_esp32spi
+#from adafruit_esp32spi import adafruit_esp32spi_wifimanager
 
 from microcontroller import watchdog as w
 from watchdog import WatchDogMode

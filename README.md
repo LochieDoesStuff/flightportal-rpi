@@ -1,3 +1,13 @@
+# flightportal RPI
+
+This is me using this codebase as a starting point to make a similar device with a raspberry pi and an epaper screen. I might move back to CircuitPython eventually?? But atm I just want to get some POC worthy going so!
+
+Original Readme is as follows:
+
+
+
+
+
 # flightportal
 Project for displaying the details of planes overhead on an Adafruit MatrixPortal and LED matrix
 
