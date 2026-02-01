@@ -1,7 +1,7 @@
 import time
 import requests
 import json
-import epd2in13b_V4
+import epd2in13_V4
 from PIL import Image,ImageDraw,ImageFont
 
 try:
@@ -194,7 +194,7 @@ def display_flight():
     font20 = ImageFont.truetype('ush_font.ttc', 20)
     font18 = ImageFont.truetype('ush_font.ttc', 18)
     #Init Screen
-    epd = epd2in13b_V4.EPD()
+    epd = epd2in13_V4.EPD()
     epd.init()
     epd.Clear()
     time.sleep(1)
