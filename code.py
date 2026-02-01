@@ -1,39 +1,15 @@
 import time
-#from random import randrange
-#import board
-#import terminalio
-#from adafruit_matrixportal.matrixportal import MatrixPortal
-#from adafruit_portalbase.network import HttpError
 import requests
 import json
-
-##import adafruit_display_text.label
-#import board
-#import displayio
-#import framebufferio
-#import rgbmatrix
-#import terminalio
-#import gc
-
-#import busio
-#from digitalio import DigitalInOut
-#import neopixel
-#from adafruit_esp32spi import adafruit_esp32spi
-#from adafruit_esp32spi import adafruit_esp32spi_wifimanager
-
-#from microcontroller import watchdog as w
-#from watchdog import WatchDogMode
-
-#w.timeout=16 # timeout in seconds
-#w.mode = WatchDogMode.RESET
-
-#FONT=terminalio.FONT
+from waveshare_epd import epd2in13b_V4
+from PIL import Image,ImageDraw,ImageFont
 
 try:
     from secrets import secrets
 except ImportError:
     print("Secrets including geo are kept in secrets.py, please add them there!")
     raise
+
 
 # How often to query fr24 - quick enough to catch a plane flying over, not so often as to cause any issues, hopefully
 QUERY_DELAY=30
@@ -136,8 +112,6 @@ def parse_details_json(fn):
         # Set up to 6 of the values above as text for display_flights to put on the screen
         # Short strings get placed on screen, then longer ones scroll over each in sequence
 
-        ''' Hiding these but they might be useful later, unsure how I'm displaying stuff here
-
         global label1_short
         global label1_long
         global label2_short
@@ -165,7 +139,6 @@ def parse_details_json(fn):
         if not label3_long:
             label3_long=''
 
-            '''
         print("\n" + "="*50)
         print("FLIGHT DETAILS REPORT")
         print("="*50)
@@ -215,6 +188,28 @@ def get_flights():
         exit(1)
     print(f" Found flight: {flight_id}")
     return flight_id
+
+def display_flight():
+    #Init fonts
+    font20 = ImageFont.truetype('ush_font.ttc', 20)
+    font18 = ImageFont.truetype('ush_font.ttc', 18)
+    #Init Screen
+    epd.init()
+    epd.Clear()
+    time.sleep(1)
+    #Draw image? Idk I'm mostly guessing here
+    HBlackimage = Image.new('1', (epd.height, epd.width), 255)  # 250*122
+    HRYimage = Image.new('1', (epd.height, epd.width), 255)  # 250*122
+    drawblack = ImageDraw.Draw(HBlackimage)
+    drawry = ImageDraw.Draw(HRYimage)
+    drawblack.text((10, 0), label1_short, font = font20, fill = 0)
+    drawblack.text((10, 30), label2_short, font = font20, fill = 0)
+    drawblack.text((10, 60), label2_short, font = font20, fill = 0)
+    epd.display(epd.getbuffer(HBlackimage))
+    time.sleep(2)
+    # Sleep Display
+    epd.sleep()
+
 
 
 
@@ -270,3 +265,4 @@ def get_flights():
 flight_id=get_flights()
 flight_json=get_flight_details(flight_id)
 parse_details_json(flight_json)
+display_flight()
