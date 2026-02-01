@@ -125,8 +125,8 @@ def parse_details_json(fn):
         label1_long=airline_name
         label2_short=airport_origin_code+"-"+airport_destination_code
         label2_long=airport_origin_name+"-"+airport_destination_name
-        label2_origin=airport_origin_name
-        label2_dest=airport_destination_name
+        label2_origin="From: " + airport_origin_name
+        label2_dest="To: " + airport_destination_name
         label3_short=aircraft_code
         label3_long=aircraft_model
 
@@ -189,6 +189,7 @@ def get_flights():
             break
     if not flight_id:
         print(" No flights found in the search area.")
+        display_no_flight()
         exit(1)
     print(f" Found flight: {flight_id}")
     return flight_id
@@ -213,6 +214,24 @@ def display_flight():
     drawblack.text((10, 60), label2_dest, font = font15, fill = 0)
     drawblack.text((10, 80), label3_short, font = font15, fill = 0)
     drawblack.text((10, 100), label3_long, font = font15, fill = 0)
+    epd.display(epd.getbuffer(HBlackimage))
+    time.sleep(2)
+    # Sleep Display
+    epd.sleep()
+
+def display_no_flight():
+    #Init fonts
+    font20 = ImageFont.truetype(FONT_PATH, 20)
+    font15 = ImageFont.truetype(FONT_PATH, 15)
+    #Init Screen
+    epd = epd2in13_V4.EPD()
+    epd.init()
+    epd.Clear()
+    time.sleep(1)
+    #Draw image? Idk I'm mostly guessing here
+    HBlackimage = Image.new('1', (epd.height, epd.width), 255)  # 250*122
+    drawblack = ImageDraw.Draw(HBlackimage)
+    drawblack.text((10, 0), "No flights found in the search area.", font = font15, fill = 0)
     epd.display(epd.getbuffer(HBlackimage))
     time.sleep(2)
     # Sleep Display
