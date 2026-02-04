@@ -306,9 +306,9 @@ while True:
                 print("error loading details, skip displaying this flight")
         last_flight=flight_id
     else:
-        if last_flight:
+        if last_flight != '':
             display_no_flight()
-        last_flight = False
+        last_flight = ''
     time.sleep(5)
     for i in range(0,QUERY_DELAY,+5):
         time.sleep(5)
