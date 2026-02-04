@@ -54,7 +54,7 @@ def get_flight_details(fn):
         flight_data = details_response.json()
     except requests.RequestException as e:
         print(f" Failed to fetch flight details: {e}")
-        exit(1)
+        return False
     return(flight_data)
     
 
@@ -180,7 +180,7 @@ def get_flights():
         data = response.json()
     except requests.RequestException as e:
         print(f" Failed to fetch flight list: {e}")
-        exit(1)
+        return False
 
     flight_id = None
     for key, value in data.items():
@@ -190,7 +190,7 @@ def get_flights():
     if not flight_id:
         print(" No flights found in the search area.")
         display_no_flight()
-        exit(1)
+        return False
     print(f" Found flight: {flight_id}")
     return flight_id
 
@@ -207,7 +207,7 @@ def display_flight():
     HBlackimage = Image.new('1', (epd.height, epd.width), 255)  # 250*122
     HRYimage = Image.new('1', (epd.height, epd.width), 255)  # 250*122
     drawblack = ImageDraw.Draw(HBlackimage)
-    drawry = ImageDraw.Draw(HRYimage)
+    #drawry = ImageDraw.Draw(HRYimage)
     drawblack.text((10, 0), label1_short, font = font15, fill = 0)
     drawblack.text((10, 20), label1_long, font = font15, fill = 0)
     drawblack.text((10, 40), label2_origin, font = font15, fill = 0)
@@ -289,7 +289,26 @@ def display_no_flight():
 #        w.feed()
 #    gc.collect()
 '''
-flight_id=get_flights()
-flight_json=get_flight_details(flight_id)
-parse_details_json(flight_json)
-display_flight()
+last_flight=''
+while True:
+    flight_id=get_flights()
+    if flight_id:
+        if flight_id==last_flight:
+            print("Same flight found, so keep showing it")
+        else:
+            flight_json=get_flight_details(flight_id)
+            if flight_json:
+                if parse_details_json(flight_json):
+                    display_flight()
+                else:
+                    print("error parsing JSON, skip displaying this flight")
+            else:
+                print("error loading details, skip displaying this flight")
+        last_flight=flight_id
+    else:
+        if last_flight:
+            display_no_flight()
+        last_flight = False
+    time.sleep(5)
+    for i in range(0,QUERY_DELAY,+5):
+        time.sleep(5)
