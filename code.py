@@ -189,7 +189,6 @@ def get_flights():
             break
     if not flight_id:
         print(" No flights found in the search area.")
-        display_no_flight()
         return False
     print(f" Found flight: {flight_id}")
     return flight_id
@@ -289,7 +288,7 @@ def display_no_flight():
 #        w.feed()
 #    gc.collect()
 '''
-last_flight=''
+last_flight='init'
 while True:
     flight_id=get_flights()
     if flight_id:
